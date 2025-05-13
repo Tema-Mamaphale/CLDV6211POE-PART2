@@ -1,0 +1,61 @@
+﻿@model Venue
+
+@{
+    ViewData["Title"] = "Edit Venue";
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<div class="card shadow-lg border-0 rounded-4 p-4 bg-white">
+    <h2 class="text-primary fw-semibold mb-4">@ViewData["Title"]</h2>
+
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label asp-for="VenueName" class="form-label fw-semibold text-dark"></label>
+            <input asp-for="VenueName" class="form-control border-primary-subtle" />
+            <span asp-validation-for="VenueName" class="text-danger small"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Location" class="form-label fw-semibold text-dark"></label>
+            <input asp-for="Location" class="form-control border-primary-subtle" />
+            <span asp-validation-for="Location" class="text-danger small"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Capacity" class="form-label fw-semibold text-dark"></label>
+            <input asp-for="Capacity" class="form-control border-primary-subtle" />
+            <span asp-validation-for="Capacity" class="text-danger small"></span>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <div class="mb-3">
+                <label class="form-label fw-semibold text-dark">Current Image</label>
+                <div>
+                    <img src="@Model.ImageUrl" alt="Current Image" class="img-fluid rounded" style="max-height: 150px;" />
+                </div>
+            </div>
+        }
+
+        <div class="mb-3">
+            <label for="imageFile" class="form-label fw-semibold text-dark">Upload New Image</label>
+            <input type="file" name="imageFile" id="imageFile" class="form-control border-primary-subtle" />
+        </div>
+
+        <input type="hidden" asp-for="VenueId" />
+
+        <div class="d-flex justify-content-start mt-4 gap-2">
+            <button type="submit" class="btn btn-primary px-4">Save</button>
+            <a asp-action="Index" class="btn btn-outline-secondary px-4">Cancel</a>
+        </div>
+    </form>
+</div>

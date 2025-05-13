@@ -1,0 +1,36 @@
+﻿@model Booking
+
+@{
+    ViewData["Title"] = "Edit Booking";
+}
+
+<div class="card shadow-lg border-0 rounded-4 p-4 bg-white">
+    <h2 class="mb-4 text-primary fw-semibold">Edit Booking</h2>
+
+    <form asp-action="Edit">
+        <input type="hidden" asp-for="BookingId" />
+
+        <div class="mb-3">
+            <label asp-for="EventId" class="form-label fw-semibold">Event</label>
+            <select asp-for="EventId" class="form-select border-primary-subtle" asp-items="ViewBag.EventId"></select>
+            <span asp-validation-for="EventId" class="text-danger small"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="VenueId" class="form-label fw-semibold">Venue</label>
+            <select asp-for="VenueId" class="form-select border-primary-subtle" asp-items="ViewBag.VenueId"></select>
+            <span asp-validation-for="VenueId" class="text-danger small"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="BookingDate" class="form-label fw-semibold">Booking Date</label>
+            <input asp-for="BookingDate" type="date" class="form-control border-primary-subtle" />
+            <span asp-validation-for="BookingDate" class="text-danger small"></span>
+        </div>
+
+        <div class="d-flex justify-content-start gap-3 mt-4">
+            <button type="submit" class="btn btn-primary px-4">Save</button>
+            <a asp-action="Index" class="btn btn-outline-secondary px-4">Cancel</a>
+        </div>
+    </form>
+</div>

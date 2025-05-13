@@ -1,0 +1,39 @@
+﻿@model EventEaseBookingSystem.Models.Event
+
+@{
+    ViewData["Title"] = "Delete Event";
+}
+
+<div class="card shadow-lg border-0 rounded-4 p-4 bg-white">
+    <h2 class="text-danger fw-semibold mb-3">Delete Event</h2>
+    <p class="fs-5 mb-4 text-muted">Are you sure you want to permanently delete this event?</p>
+
+    <dl class="row mb-4">
+        <dt class="col-sm-3 text-dark fw-medium">Event Name</dt>
+        <dd class="col-sm-9">@Model.EventName</dd>
+
+        <dt class="col-sm-3 text-dark fw-medium">Event Date</dt>
+        <dd class="col-sm-9">@Model.EventDate.ToShortDateString()</dd>
+
+        <dt class="col-sm-3 text-dark fw-medium">Venue</dt>
+        <dd class="col-sm-9">@Model.Venue?.VenueName</dd>
+    </dl>
+
+    @* Success/Error Message Display *@
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+
+    <form asp-action="Delete" method="post" class="d-flex gap-3">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="EventId" />
+        <button type="submit" class="btn btn-danger px-4">Yes, Delete</button>
+        <a asp-action="Index" class="btn btn-outline-secondary px-4">Cancel</a>
+    </form>
+</div>

@@ -1,0 +1,25 @@
+﻿@model Venue
+
+@{
+    ViewData["Title"] = "Venue Details";
+}
+
+<div class="card shadow-lg border-0 rounded-4 p-4 bg-white">
+    <h2 class="text-primary fw-semibold mb-4">@ViewData["Title"]</h2>
+
+    <div class="mb-3">
+        <h4 class="fw-bold">@Model.VenueName</h4>
+        <p class="mb-1"><strong>Location:</strong> @Model.Location</p>
+        <p class="mb-1"><strong>Capacity:</strong> @Model.Capacity</p>
+        <p class="mb-1"><strong>Image:</strong></p>
+        <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? "/images/placeholder.png" : Model.ImageUrl)"
+             alt="Venue Image"
+             class="img-thumbnail"
+             style="max-width: 300px;" />
+    </div>
+
+    <div class="d-flex gap-3 mt-4">
+        <a asp-action="Edit" asp-route-id="@Model.VenueId" class="btn btn-outline-primary px-4">Edit</a>
+        <a asp-action="Index" class="btn btn-secondary px-4">Back to List</a>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+﻿@model IEnumerable<EventEaseBookingSystem.Models.Event>
+
+@{
+    ViewData["Title"] = "Events";
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="card shadow-sm border-0 rounded-4 p-4 bg-white">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary fw-semibold mb-0">Event List</h2>
+        <a class="btn btn-primary px-4" asp-action="Create">+ Add Event</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle text-nowrap">
+            <thead class="table-light">
+                <tr>
+                    <th class="ps-3">Name</th>
+                    <th>Date</th>
+                    <th>Venue</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="ps-3">@item.EventName</td>
+                        <td>@item.EventDate.ToShortDateString()</td>
+                        <td>@item.Venue?.VenueName</td>
+                        <td class="text-center">
+                            <div class="d-flex justify-content-center gap-2 flex-wrap">
+                                <a class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.EventId">Details</a>
+                                <a class="btn btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@item.EventId">Edit</a>
+                                <form asp-action="Delete" asp-route-id="@item.EventId" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this event?');">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

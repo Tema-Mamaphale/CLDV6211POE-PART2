@@ -1,0 +1,25 @@
+﻿@model Booking
+
+@{
+    ViewData["Title"] = "Booking Details";
+}
+
+<div class="card shadow-lg border-0 rounded-4 p-4 bg-white">
+    <h2 class="text-primary fw-semibold mb-4">Booking Details</h2>
+
+    <dl class="row">
+        <dt class="col-sm-3 text-dark fw-medium">Event</dt>
+        <dd class="col-sm-9">@Model.Event?.EventName</dd>
+
+        <dt class="col-sm-3 text-dark fw-medium">Venue</dt>
+        <dd class="col-sm-9">@Model.Venue?.VenueName</dd>
+
+        <dt class="col-sm-3 text-dark fw-medium">Booking Date</dt>
+        <dd class="col-sm-9">@Model.BookingDate.ToShortDateString()</dd>
+    </dl>
+
+    <div class="d-flex gap-3 mt-4">
+        <a asp-action="Edit" asp-route-id="@Model.BookingId" class="btn btn-outline-primary px-4">Edit</a>
+        <a asp-action="Index" class="btn btn-secondary px-4">Back to List</a>
+    </div>
+</div>
